@@ -1,0 +1,36 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require swiper-bundle.min
+
+ *= require_tree .
+ *= require_self
+ 
+ */
+@import "fonts/fonts";
+@import "fonts/font-icons";
+@import "bootstrap.min";
+@import "swiper-bundle.min";
+@import "animate";
+@import "styles";
+
+
+.footer-logo {
+  background-image: image-url('slider/slider-1.png');
+  width: 174px;
+  height: 44px;
+}
+
+.flat-slider.home-1 {
+  background-image: image-url('slider/slider-1.png');
+  background-attachment: fixed;
+}

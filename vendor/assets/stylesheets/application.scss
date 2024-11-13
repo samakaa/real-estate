@@ -1,0 +1,13 @@
+// app/assets/stylesheets/application.scss
+
+@import "fonts/font-icons";
+@import "bootstrap.min";
+@import "swiper-bundle.min";
+@import "animate";
+@import "styles";
+
+.footer-logo {
+  background-image: image-url('logo/logo-footer@2x.png');
+  width: 174px;
+  height: 44px;
+}

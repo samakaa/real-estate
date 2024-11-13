@@ -1,0 +1,163 @@
+  <div class="sidebar-menu-dashboard">
+                    <ul class="box-menu-dashboard">
+                        <li class="nav-menu-item"><a class="nav-menu-link" href="dashboard.html"><span class="icon icon-dashboard"></span> Dashboards</a></li>
+                        <li class="nav-menu-item"><a class="nav-menu-link" href="my-property.html"><span class="icon icon-list-dashes"></span>My Properties</a></li>
+                        <li class="nav-menu-item"><a class="nav-menu-link" href="my-invoices.html"><span class="icon icon-file-text"></span> My Invoices</a></li>
+                        <li class="nav-menu-item"><a class="nav-menu-link" href="my-favorites.html"><span class="icon icon-heart"></span>My Favorites</a></li>
+                        <li class="nav-menu-item"><a class="nav-menu-link" href="reviews.html"><span class="icon icon-review"></span> Reviews</a></li>
+                        <li class="nav-menu-item active"><a class="nav-menu-link" href="my-profile.html"><span class="icon icon-profile"></span> My Profile</a></li>
+                        <li class="nav-menu-item"><a class="nav-menu-link" href="add-property.html">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.5 3H4.5C4.10218 3 3.72064 3.15804 3.43934 3.43934C3.15804 3.72064 3 4.10218 3 4.5V19.5C3 19.8978 3.15804 20.2794 3.43934 20.5607C3.72064 20.842 4.10218 21 4.5 21H19.5C19.8978 21 20.2794 20.842 20.5607 20.5607C20.842 20.2794 21 19.8978 21 19.5V4.5C21 4.10218 20.842 3.72064 20.5607 3.43934C20.2794 3.15804 19.8978 3 19.5 3ZM19.5 19.5H4.5V4.5H19.5V19.5ZM16.5 12C16.5 12.1989 16.421 12.3897 16.2803 12.5303C16.1397 12.671 15.9489 12.75 15.75 12.75H12.75V15.75C12.75 15.9489 12.671 16.1397 12.5303 16.2803C12.3897 16.421 12.1989 16.5 12 16.5C11.8011 16.5 11.6103 16.421 11.4697 16.2803C11.329 16.1397 11.25 15.9489 11.25 15.75V12.75H8.25C8.05109 12.75 7.86032 12.671 7.71967 12.5303C7.57902 12.3897 7.5 12.1989 7.5 12C7.5 11.8011 7.57902 11.6103 7.71967 11.4697C7.86032 11.329 8.05109 11.25 8.25 11.25H11.25V8.25C11.25 8.05109 11.329 7.86032 11.4697 7.71967C11.6103 7.57902 11.8011 7.5 12 7.5C12.1989 7.5 12.3897 7.57902 12.5303 7.71967C12.671 7.86032 12.75 8.05109 12.75 8.25V11.25H15.75C15.9489 11.25 16.1397 11.329 16.2803 11.4697C16.421 11.6103 16.5 11.8011 16.5 12Z" fill="#A3ABB0"/>
+                            </svg>
+                             Add Property</a></li>
+                        <li class="nav-menu-item"><a class="nav-menu-link" href="index.html"><span class="icon icon-sign-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+                <!-- end sidebar dashboard -->
+                <div class="main-content">
+                    <div class="main-content-inner wrap-dashboard-content-2">
+                        <div class="button-show-hide show-mb">
+                            <span class="body-1">Show Dashboard</span>
+                        </div>
+                        <div class="widget-box-2">
+                            <div class="box">
+                                <h6 class="title">Account Settings</h6>
+                                <div class="box-agent-account">
+                                    <h6>Agent Account</h6>
+                                    <p class="note">Your current account type is set to agent, if you want to remove your agent account, and return to normal account, you must click the button below</p>
+                                    <a href="#" class="tf-btn primary">Remove Agent Account</a>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <h6 class="title">Avatar</h6>
+                               <!-- app/views/users/edit.html.erb -->
+                                    <div class="box-agent-avt">
+                                      <div class="avatar">
+                                        <% if @user.image.present? %>
+                                          <%= image_tag @user.image, alt: "avt", loading: "lazy", width: 128, height: 128 %>
+                                        <% else %>
+                                          <%= image_tag "avatar/avt-6.jpg", alt: "avt", loading: "lazy", width: 128, height: 128 %>
+                                        <% end %>
+                                      </div>
+                                      <div class="content uploadfile">
+                                        <p>Upload a new avatar</p>
+                                      <%= form_with model: current_user, url: user_registration_path, method: :patch, local: true do |f| %>
+
+                                          <div class="box-ip">
+                                            <%= f.file_field :image, class: "ip-file" %>
+                                          </div>
+                                          <p>JPEG 100x100</p>
+                                          <%= f.submit "Update Avatar", class: "btn btn-primary" %>
+                                        <% end %>
+                                      </div>
+                                    </div>
+
+
+                            </div>
+
+                            </div>
+                          
+                            <%= form_with model: @user, url: user_registration_path, method: :patch, local: true do |f| %>
+  <h6 class="title">Information</h6>
+  <div class="box box-fieldset">
+    <%= f.label :name, "Full name:" %><span>*</span>
+    <%= f.text_field :name, class: "form-control style-1" %>
+  </div>
+  <div class="box box-fieldset">
+    <%= f.label :description, "Description:" %><span>*</span>
+    <%= f.text_area :description, class: "form-control style-1" %>
+  </div>
+
+  <div class="box grid-4 gap-30">
+    <div class="box-fieldset">
+      <%= f.label :position, "Your position:" %><span>*</span>
+      <%= f.text_field :position, class: "form-control style-1" %>
+    </div>
+    <div class="box-fieldset">
+      <%= f.label :phone_number, "Phone Number:" %><span>*</span>
+      <%= f.text_field :phone_number, class: "form-control style-1" %>
+    </div>
+    <div class="box-fieldset">
+      <%= f.label :office_number, "Office Number:" %><span>*</span>
+      <%= f.text_field :office_number, class: "form-control style-1" %>
+    </div>
+    <div class="box-fieldset">
+      <%= f.label :office_address, "Office Address:" %><span>*</span>
+      <%= f.text_field :office_address, class: "form-control style-1" %>
+    </div>
+  </div>
+
+  <div class="box grid-4 gap-30 box-info-2">
+    <div class="box-fieldset">
+      <%= f.label :job, "Job:" %><span>*</span>
+      <%= f.text_field :job, class: "form-control style-1" %>
+    </div>
+    <div class="box-fieldset">
+      <%= f.label :email, "Email address:" %><span>*</span>
+      <%= f.email_field :email, class: "form-control style-1" %>
+    </div>
+  </div>
+
+  <div class="box box-fieldset">
+    <%= f.label :personal_address, "Location:" %><span>*</span>
+    <%= f.text_field :personal_address, class: "form-control style-1" %>
+  </div>
+  <div class="box box-fieldset">
+    <%= f.label :facebook, "Facebook:" %><span>*</span>
+    <%= f.text_field :facebook, class: "form-control style-1" %>
+  </div>
+  <div class="box box-fieldset">
+    <%= f.label :twitter, "Twitter:" %><span>*</span>
+    <%= f.text_field :twitter, class: "form-control style-1" %>
+  </div>
+  <div class="box box-fieldset">
+    <%= f.label :linkedin, "Linkedin:" %><span>*</span>
+    <%= f.text_field :linkedin, class: "form-control style-1" %>
+  </div>
+  <div class="box">
+    <%= f.submit "Save & Update", class: "tf-btn primary" %>
+  </div>
+
+  <h6 class="title">Change password</h6>
+  <div class="box grid-3 gap-30">
+    <div class="box-fieldset">
+      <%= f.label :current_password, "Old Password:" %><span>*</span>
+      <div class="box-password">
+        <%= f.password_field :current_password, class: "form-contact style-1 password-field", placeholder: "Password" %>
+        <span class="show-pass">
+          <i class="icon-pass icon-eye"></i>
+          <i class="icon-pass icon-eye-off"></i>
+        </span>
+      </div>
+    </div>
+    <div class="box-fieldset">
+      <%= f.label :password, "New Password:" %><span>*</span>
+      <div class="box-password">
+        <%= f.password_field :password, class: "form-contact style-1 password-field2", placeholder: "Password" %>
+        <span class="show-pass2">
+          <i class="icon-pass icon-eye"></i>
+          <i class="icon-pass icon-eye-off"></i>
+        </span>
+      </div>
+    </div>
+    <div class="box-fieldset">
+      <%= f.label :password_confirmation, "Confirm Password:" %><span>*</span>
+      <div class="box-password">
+        <%= f.password_field :password_confirmation, class: "form-contact style-1 password-field3", placeholder: "Password" %>
+        <span class="show-pass3">
+          <i class="icon-pass icon-eye"></i>
+          <i class="icon-pass icon-eye-off"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="box">
+    <%= f.submit "Update Password", class: "tf-btn primary" %>
+  </div>
+<% end %>
+
+                    <div class="footer-dashboard">
+                        <p class="text-variant-2">©2024 Homzen. All Rights Reserved.</p>
+                    </div>
+                </div>

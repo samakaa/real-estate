@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RealEstateApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Add this in the <head> section -->
+<!-- Include jQuery before Toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <%= javascript_include_tag 'custom/jquery.min', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/jquery.nice-select.min', 'data-turbolinks-track': 'reload' %>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- Include Bootstrap CSS and JS (use the correct paths for your setup) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Add to your layout file (e.g., application.html.erb) in the head section -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+
+
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- WOW.js for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag 'custom/main', 'data-turbolinks-track': 'reload' %>
+
+<%= javascript_include_tag 'custom/swiper-bundle.min', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'custom/animation_heading', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/bootstrap.min', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/bootstrap.min', 'data-turbolinks-track': 'reload' %>
+
+ <%= javascript_include_tag 'custom/plugin', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/rangle-slider', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/shortcodes', 'data-turbolinks-track': 'reload' %>
+ 
+   <%= javascript_include_tag 'custom/map-single', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/marker', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/infobox.min', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/jquery.nice-select.min', 'data-turbolinks-track': 'reload' %>
+
+
+<%= javascript_importmap_tags %>
+
+
+
+     
+ 
+  </head>
+
+  <body class="body counter-scroll">
+    <div class="preload preload-container">
+    <div class="boxes">
+    
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+   <div id="wrapper">
+        <div id="page" class="clearfix">
+            <div class="layout-wrap">
+       
+
+         <main>
+           <%= render "shared/header" %>
+          <%= javascript_include_tag 'custom/main', 'data-turbolinks-track': 'reload' %>
+          
+      
+
+            <%= yield %>
+               <%= render "shared/footer" %>
+         </main>
+     </div>
+     </div>
+     </div>
+
+   
+  
+
+        <!-- popup login -->
+          <div class="modal fade" id="modalLogin">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="flat-account bg-surface">
+                  <h3 class="title text-center">Log In</h3>
+                  <span class="close-modal icon-close2" data-bs-dismiss="modal"></span>
+                  
+                    <fieldset class="box-fieldset">
+              
+                    <%= form_with(url: user_session_path, method: :post, local: true) do |f| %>
+                      <label for="name">Your Names<span>*</span>:</label>
+                    
+                    <%= f.email_field :email, class: "form-contact style-1",name: "user[email]", placeholder: "themesflat@gmail.com", required: true %>
+
+                    </fieldset>
+                    <fieldset class="box-fieldset">
+                      <label for="pass">Password<span>*</span>:</label>
+                      <div class="box-password">
+                      <%= f.password_field :password, name: "user[password]",class:"form-contact style-1 password-field" ,placeholder:"Password",required: true %>
+                      
+                        <span class="show-pass">
+                          <i class="icon-pass icon-eye"></i>
+                          <i class="icon-pass icon-eye-off"></i>
+                        </span>
+                      </div>
+                    </fieldset>
+                    <div class="d-flex justify-content-between flex-wrap gap-12">
+                      <fieldset class="d-flex align-items-center gap-6">
+                        <input type="checkbox" class="tf-checkbox style-2" id="cb1">
+                        <label for="cb1" class="caption-1 text-variant-1">Remember me</label>
+                      </fieldset>
+                      <a href="#" class="caption-1 text-primary">Forgot password?</a>
+                    </div>
+                    <div class="text-variant-1 auth-line">or sign up with</div>
+                    <div class="login-social">
+                      <a href="#" class="btn-login-social">
+                        <img src="images/logo/fb.jpg" alt="img">
+                        Continue with Facebook
+                      </a>
+                      <a href="#" class="btn-login-social">
+                        <img src="images/logo/google.jpg" alt="img">
+                        Continue with Google
+                      </a>
+                      <a href="#" class="btn-login-social">
+                        <img src="images/logo/tw.jpg" alt="img">
+                        Continue with Twitter
+                      </a>
+                    </div>
+                    <%= f.submit "Login" , class:"tf-btn primary w-100"%>
+                    
+        
+                  
+                    <div class="mt-12 text-variant-1 text-center noti">Not registered yet?<a href="#modalRegister"
+                        data-bs-toggle="modal" class="text-black fw-5">Sign Up</a> </div>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- popup register -->
+        <!-- Popup register -->
+        <div class="modal fade" id="modalRegister">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="flat-account bg-surface">
+                <h3 class="title text-center">Register</h3>
+                <span class="close-modal icon-close2" data-bs-dismiss="modal"></span>
+                                  
+                            <% model_instance = @resource || @user || @property %>
+                  <% if model_instance&.errors&.any? %>
+                    <div class="alert alert-danger">
+                      <ul>
+                        <% model_instance.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+
+                <%= form_with(model: User.new, url: user_registration_path, local: true) do |f| %>
+                  
+                  <!-- Username or Email -->
+                  <fieldset class="box-fieldset">
+                    <%= f.label :email, "Username or email address" %><span>*</span>:
+                    <%= f.email_field :email, class: "form-contact style-1", placeholder: "you@example.com", required: true %>
+                  </fieldset>
+
+                  <!-- Password -->
+                  <fieldset class="box-fieldset">
+                    <%= f.label :password, "Password" %><span>*</span>:
+                    <div class="box-password">
+                      <%= f.password_field :password, class: "form-contact style-1 password-field", placeholder: "Password", required: true %>
+                      <span class="show-pass">
+                        <i class="icon-pass icon-eye"></i>
+                        <i class="icon-pass icon-eye-off"></i>
+                      </span>
+                    </div>
+                  </fieldset>
+
+                  <!-- Password Confirmation -->
+                  <fieldset class="box-fieldset">
+                    <%= f.label :password_confirmation, "Confirm Password" %><span>*</span>:
+                    <div class="box-password">
+                      <%= f.password_field :password_confirmation, class: "form-contact style-1 password-field2", placeholder: "Confirm Password", required: true %>
+                      <span class="show-pass2">
+                        <i class="icon-pass icon-eye"></i>
+                        <i class="icon-pass icon-eye-off"></i>
+                      </span>
+                    </div>
+                  </fieldset>
+
+                  <!-- Terms of Service Checkbox -->
+                  <fieldset class="d-flex align-items-center gap-6">
+                    <%= f.check_box :terms, class: "tf-checkbox style-2", id: "cb1" %>
+                    <label for="cb1" class="caption-1 text-variant-1">I agree to the <span class="fw-5 text-black">Terms of User</span></label>
+                  </fieldset>
+
+                  <!-- Register Button -->
+                  <button type="submit" class="tf-btn primary w-100">Register</button>
+
+                  <!-- Link to Login Modal -->
+                  <div class="mt-12 text-variant-1 text-center noti">
+                    Already have an account? <a href="#modalLogin" data-bs-toggle="modal" data-bs-dismiss="modal" class="text-black fw-5">Login Here</a>
+                  </div>
+
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+      <!-- go top -->
+      <div class="progress-wrap">
+          <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+          <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 286.138;"></path>
+          </svg>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          console.log("Flash message script running");
+          <% if flash[:notice] %>
+            console.log("Notice flash:", "<%= j flash[:notice] %>");
+            toastr.success("<%= j flash[:notice] %>");
+          <% elsif flash[:alert] %>
+            console.log("Alert flash:", "<%= j flash[:alert] %>");
+            toastr.error("<%= j flash[:alert] %>");
+          <% end %>
+        });
+      </script>
+
+
+
+  </body>
+</html>
