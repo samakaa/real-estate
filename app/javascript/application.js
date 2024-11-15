@@ -2,7 +2,8 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require rails-ujs
-//= require_tree .
+//= require_tree ./custom
+
 
 
 import "bootstrap";
@@ -20,6 +21,12 @@ import "custom";
 import "@fortawesome/fontawesome-free/css/all";
 import "custom/main";
 import 'bootstrap';  // Assuming Bootstrap is already included
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+document.addEventListener("turbo:load", function () {
+  AOS.init();
+});
 
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
@@ -84,3 +91,4 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileMenu.classList.remove("active");
   });
 });
+

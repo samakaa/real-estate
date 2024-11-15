@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "@rails/webpacker": "5.4.4",
+    "aos": "^2.3.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "jquery": "^3.7.1",

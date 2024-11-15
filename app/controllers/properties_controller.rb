@@ -54,7 +54,7 @@ end
 
   def property_params
     params.require(:property).permit(
-      :title, :description, :price, :bedrooms, :bathrooms, :agent_id,
+      :title, :description, :price, :bedrooms, :bathrooms, :agent_id, :property_type, :video, :label,
       :zip_code, :country, :province_state, :neighborhood, :unit_price, :status, :size, :land_area, :year_built,
       :rooms, :garages, amenities: [], attachments: [], images: []
     )
