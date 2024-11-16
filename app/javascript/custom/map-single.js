@@ -1,6 +1,6 @@
 /*var infoBox_ratingType='star-rating';*/
 
-(function($) {
+(function ($) {
     "use strict";
 
     function mainMap() {
@@ -11,11 +11,11 @@
         }
 
         var locations = [
-            [locationData(), 40.709327, -74.004815, 1, "<div></div>"]
+            [locationData(), 35.505799, 11.043909, 1, "<div></div>"]
         ];
 
         function numericalRating(ratingElem) {
-            $(ratingElem).each(function() {
+            $(ratingElem).each(function () {
                 var dataRating = $(this).attr("data-rating");
                 if (dataRating >= 4.0) {
                     $(this).addClass("high");
@@ -29,7 +29,7 @@
         numericalRating(".numerical-rating");
 
         function starRating(ratingElem) {
-            $(ratingElem).each(function() {
+            $(ratingElem).each(function () {
                 var dataRating = $(this).attr("data-rating");
 
                 function starsOutput(
@@ -153,7 +153,7 @@
         var map = new google.maps.Map(document.getElementById("map-single"), {
             zoom: zoomLevel,
             scrollwheel: false,
-            center: new google.maps.LatLng(40.709295, -74.003099),
+            center: new google.maps.LatLng(35.505799, 11.043909),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             zoomControl: true,
             zoomControlOptions: {
@@ -166,149 +166,149 @@
             streetViewControl: false,
             gestureHandling: "cooperative",
             styles: [{
-                    featureType: "all",
-                    elementType: "geometry.fill",
-                    stylers: [{
-                        weight: "2.00",
-                    }, ],
+                featureType: "all",
+                elementType: "geometry.fill",
+                stylers: [{
+                    weight: "2.00",
+                },],
+            },
+            {
+                featureType: "all",
+                elementType: "geometry.stroke",
+                stylers: [{
+                    color: "#9c9c9c",
+                },],
+            },
+            {
+                featureType: "all",
+                elementType: "labels.text",
+                stylers: [{
+                    visibility: "on",
+                },],
+            },
+            {
+                featureType: "landscape",
+                elementType: "all",
+                stylers: [{
+                    color: "#f2f2f2",
+                },],
+            },
+            {
+                featureType: "landscape",
+                elementType: "geometry.fill",
+                stylers: [{
+                    color: "#ffffff",
+                },],
+            },
+            {
+                featureType: "landscape.man_made",
+                elementType: "geometry.fill",
+                stylers: [{
+                    color: "#ffffff",
+                },],
+            },
+            {
+                featureType: "poi",
+                elementType: "all",
+                stylers: [{
+                    visibility: "off",
+                },],
+            },
+            {
+                featureType: "road",
+                elementType: "all",
+                stylers: [{
+                    saturation: -100,
                 },
                 {
-                    featureType: "all",
-                    elementType: "geometry.stroke",
-                    stylers: [{
-                        color: "#9c9c9c",
-                    }, ],
+                    lightness: 45,
+                },
+                ],
+            },
+            {
+                featureType: "road",
+                elementType: "geometry.fill",
+                stylers: [{
+                    color: "#eeeeee",
+                },],
+            },
+            {
+                featureType: "road",
+                elementType: "labels.text.fill",
+                stylers: [{
+                    color: "#7b7b7b",
+                },],
+            },
+            {
+                featureType: "road",
+                elementType: "labels.text.stroke",
+                stylers: [{
+                    color: "#ffffff",
+                },],
+            },
+            {
+                featureType: "road.highway",
+                elementType: "all",
+                stylers: [{
+                    visibility: "simplified",
+                },],
+            },
+            {
+                featureType: "road.arterial",
+                elementType: "labels.icon",
+                stylers: [{
+                    visibility: "off",
+                },],
+            },
+            {
+                featureType: "transit",
+                elementType: "all",
+                stylers: [{
+                    visibility: "off",
+                },],
+            },
+            {
+                featureType: "water",
+                elementType: "all",
+                stylers: [{
+                    color: "#46bcec",
                 },
                 {
-                    featureType: "all",
-                    elementType: "labels.text",
-                    stylers: [{
-                        visibility: "on",
-                    }, ],
+                    visibility: "on",
                 },
-                {
-                    featureType: "landscape",
-                    elementType: "all",
-                    stylers: [{
-                        color: "#f2f2f2",
-                    }, ],
-                },
-                {
-                    featureType: "landscape",
-                    elementType: "geometry.fill",
-                    stylers: [{
-                        color: "#ffffff",
-                    }, ],
-                },
-                {
-                    featureType: "landscape.man_made",
-                    elementType: "geometry.fill",
-                    stylers: [{
-                        color: "#ffffff",
-                    }, ],
-                },
-                {
-                    featureType: "poi",
-                    elementType: "all",
-                    stylers: [{
-                        visibility: "off",
-                    }, ],
-                },
-                {
-                    featureType: "road",
-                    elementType: "all",
-                    stylers: [{
-                            saturation: -100,
-                        },
-                        {
-                            lightness: 45,
-                        },
-                    ],
-                },
-                {
-                    featureType: "road",
-                    elementType: "geometry.fill",
-                    stylers: [{
-                        color: "#eeeeee",
-                    }, ],
-                },
-                {
-                    featureType: "road",
-                    elementType: "labels.text.fill",
-                    stylers: [{
-                        color: "#7b7b7b",
-                    }, ],
-                },
-                {
-                    featureType: "road",
-                    elementType: "labels.text.stroke",
-                    stylers: [{
-                        color: "#ffffff",
-                    }, ],
-                },
-                {
-                    featureType: "road.highway",
-                    elementType: "all",
-                    stylers: [{
-                        visibility: "simplified",
-                    }, ],
-                },
-                {
-                    featureType: "road.arterial",
-                    elementType: "labels.icon",
-                    stylers: [{
-                        visibility: "off",
-                    }, ],
-                },
-                {
-                    featureType: "transit",
-                    elementType: "all",
-                    stylers: [{
-                        visibility: "off",
-                    }, ],
-                },
-                {
-                    featureType: "water",
-                    elementType: "all",
-                    stylers: [{
-                            color: "#46bcec",
-                        },
-                        {
-                            visibility: "on",
-                        },
-                    ],
-                },
-                {
-                    featureType: "water",
-                    elementType: "geometry.fill",
-                    stylers: [{
-                        color: "#c8d7d4",
-                    }, ],
-                },
-                {
-                    featureType: "water",
-                    elementType: "labels.text.fill",
-                    stylers: [{
-                        color: "#070707",
-                    }, ],
-                },
-                {
-                    featureType: "water",
-                    elementType: "labels.text.stroke",
-                    stylers: [{
-                        color: "#ffffff",
-                    }, ],
-                },
+                ],
+            },
+            {
+                featureType: "water",
+                elementType: "geometry.fill",
+                stylers: [{
+                    color: "#c8d7d4",
+                },],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.fill",
+                stylers: [{
+                    color: "#070707",
+                },],
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.stroke",
+                stylers: [{
+                    color: "#ffffff",
+                },],
+            },
             ],
         });
 
-        $(".listing-item-container").on("mouseover", function() {
+        $(".listing-item-container").on("mouseover", function () {
             var listingAttr = $(this).data("marker-id");
             if (listingAttr !== undefined) {
                 var listing_id = $(this).data("marker-id") - 1;
                 var marker_div = allMarkers[listing_id].div;
                 $(marker_div).addClass("clicked");
-                $(this).on("mouseout", function() {
+                $(this).on("mouseout", function () {
                     if ($(marker_div).is(":not(.infoBox-opened)")) {
                         $(marker_div).removeClass("clicked");
                     }
@@ -343,34 +343,34 @@
             url: "",
             height: 50,
             width: 50
-        }, ];
+        },];
         var markerIco;
         for (i = 0; i < locations.length; i++) {
             markerIco = locations[i][4];
             var overlaypositions = new google.maps.LatLng(
-                    locations[i][1],
-                    locations[i][2]
-                ),
+                locations[i][1],
+                locations[i][2]
+            ),
                 overlay = new CustomMarker(
                     overlaypositions,
                     map, {
-                        marker_id: i
-                    },
+                    marker_id: i
+                },
                     markerIco
                 );
             allMarkers.push(overlay);
             google.maps.event.addDomListener(
                 overlay,
                 "click",
-                (function(overlay, i) {
-                    return function() {
+                (function (overlay, i) {
+                    return function () {
                         ib.setOptions(boxOptions);
                         boxText.innerHTML = locations[i][0];
                         ib.close();
                         ib.open(map, overlay);
                         currentInfobox = locations[i][3];
-                        google.maps.event.addListener(ib, "domready", function() {
-                            $(".infoBox-close").click(function(e) {
+                        google.maps.event.addListener(ib, "domready", function () {
+                            $(".infoBox-close").click(function (e) {
                                 e.preventDefault();
                                 ib.close();
                                 $(".map-marker-container").removeClass(
@@ -388,7 +388,7 @@
             minClusterSize: 2,
         };
         markerCluster = new MarkerClusterer(map, allMarkers, options);
-        google.maps.event.addDomListener(window, "resize", function() {
+        google.maps.event.addDomListener(window, "resize", function () {
             var center = map.getCenter();
             google.maps.event.trigger(map, "resize");
             map.setCenter(center);
@@ -411,15 +411,15 @@
             var zoomOutButton = document.createElement("div");
             zoomOutButton.className = "custom-zoom-out";
             controlWrapper.appendChild(zoomOutButton);
-            google.maps.event.addDomListener(zoomInButton, "click", function() {
+            google.maps.event.addDomListener(zoomInButton, "click", function () {
                 map.setZoom(map.getZoom() + 1);
             });
-            google.maps.event.addDomListener(zoomOutButton, "click", function() {
+            google.maps.event.addDomListener(zoomOutButton, "click", function () {
                 map.setZoom(map.getZoom() - 1);
             });
         }
         var scrollEnabling = $("#scrollEnabling");
-        $(scrollEnabling).click(function(e) {
+        $(scrollEnabling).click(function (e) {
             e.preventDefault();
             $(this).toggleClass("enabled");
             if ($(this).is(".enabled")) {
@@ -432,14 +432,14 @@
                 });
             }
         });
-        $("#geoLocation, .input-with-icon.location a").click(function(e) {
+        $("#geoLocation, .input-with-icon.location a").click(function (e) {
             e.preventDefault();
             geolocate();
         });
 
         function geolocate() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = new google.maps.LatLng(
                         position.coords.latitude,
                         position.coords.longitude
@@ -462,7 +462,7 @@
         this.setMap(map);
     }
     CustomMarker.prototype = new google.maps.OverlayView();
-    CustomMarker.prototype.draw = function() {
+    CustomMarker.prototype.draw = function () {
         var self = this;
         var div = this.div;
         if (!div) {
@@ -480,7 +480,7 @@
                 '<div class="marker-arrow"></div>' +
                 "</div>" +
                 "</div>";
-            google.maps.event.addDomListener(div, "click", function(event) {
+            google.maps.event.addDomListener(div, "click", function (event) {
                 $(".map-marker-container").removeClass("clicked infoBox-opened");
                 google.maps.event.trigger(self, "click");
                 $(this).addClass("clicked infoBox-opened");
@@ -497,14 +497,14 @@
             div.style.top = point.y + "px";
         }
     };
-    CustomMarker.prototype.remove = function() {
+    CustomMarker.prototype.remove = function () {
         if (this.div) {
             this.div.parentNode.removeChild(this.div);
             this.div = null;
             $(this).removeClass("clicked");
         }
     };
-    CustomMarker.prototype.getPosition = function() {
+    CustomMarker.prototype.getPosition = function () {
         return this.latlng;
     };
 })(this.jQuery);
