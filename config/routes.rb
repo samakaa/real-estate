@@ -4,7 +4,14 @@ Rails.application.routes.draw do
 
 
 
-  resources :properties
+resources :properties do
+  member do
+    delete :delete_image_attachment
+  end
+end
+
+
+
    direct :rails_blob do |blob|
     route_for(:rails_blob, blob)
    end

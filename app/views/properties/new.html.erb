@@ -55,6 +55,15 @@
           <%= form.select :neighborhood, ['None', 'Little Italy', 'Bedford Park'], {}, class: "nice-select" %>
         </fieldset>
       </div>
+      <%= form.hidden_field :latitude, id: 'latitude-field' %>
+      <%= form.hidden_field :longitude, id: 'longitude-field' %>
+
+      <div class="single-property-element single-property-map">
+        <div class="h7 title fw-7">Map</div>
+        <div id="map-single" class="map-single" data-map-zoom="13" data-map-scroll="true"></div>
+      </div>
+
+
     </div>
   </div>
 
@@ -170,4 +179,56 @@
     <%= form.submit "Add Property", class: "tf-btn primary" %>
   </div>
 </div>
+
+
 <% end %>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<%= javascript_include_tag "custom/carousel" %>
+<%= javascript_include_tag "custom/swiper-bundle.min" %>
+<%= javascript_include_tag "custom/jquery.fancybox" %>
+<%= javascript_include_tag "custom/rangle-slider" %>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBWzH7VJTGL_5cQgGVBi7wqDc-BhQRLeY"></script>
+<%= javascript_include_tag "custom/map-single" %>
+<%= javascript_include_tag "custom/marker" %>
+<%= javascript_include_tag "custom/infobox.min" %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const mapElement = document.getElementById("map-single");
+
+    if (mapElement) {
+      // Set up map with initial view (e.g., center of the world)
+      const map = L.map("map-single").setView([35.511203, 11.04601], mapElement.dataset.mapZoom);
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      // Marker for the selected location
+      let marker = null;
+
+      // Event listener for map clicks
+      map.on("click", function(e) {
+        const {
+          lat,
+          lng
+        } = e.latlng;
+
+        // Update or create a marker
+        if (marker) {
+          marker.setLatLng(e.latlng);
+        } else {
+          marker = L.marker(e.latlng).addTo(map);
+        }
+
+        // Update hidden fields with the selected coordinates
+        document.getElementById("latitude-field").value = lat;
+        document.getElementById("longitude-field").value = lng;
+      });
+    }
+  });
+</script>

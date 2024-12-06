@@ -242,7 +242,8 @@
 
         <div class="single-property-element single-property-map">
           <div class="h7 title fw-7">Map</div>
-          <div id="map-single" class="map-single" data-map-zoom="13" data-map-scroll="true"></div>
+          <div id="map-single" class="map-single" data-map-zoom="13" data-map-scroll="true" data-locations="<%= @locations.to_json %>"></div>
+
           <ul class="info-map">
             <li>
               <div class="fw-7">Address</div>
@@ -946,7 +947,7 @@
 <%= javascript_include_tag "custom/jquery.fancybox" %>
 <%= javascript_include_tag "custom/rangle-slider" %>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuSiPhoDaOJ7aqtJVtQhYhLzwwJ7rQlmA"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBWzH7VJTGL_5cQgGVBi7wqDc-BhQRLeY"></script>
 <%= javascript_include_tag "custom/map-single" %>
 <%= javascript_include_tag "custom/marker" %>
 <%= javascript_include_tag "custom/infobox.min" %>

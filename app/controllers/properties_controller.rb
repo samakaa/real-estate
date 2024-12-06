@@ -24,23 +24,49 @@ class PropertiesController < ApplicationController
 
  def show
   @property = Property.find(params[:id])
+    @locations = [
+      {
+        title: @property.title,
+        latitude: @property.latitude,
+        longitude: @property.longitude,
+        address: @property.address
+      }
+    ]
 end
 
   def edit
+     @property
   end
 
-  def update
-    if @property.update(property_params)
-      redirect_to @property, notice: 'Property was successfully updated.'
-    else
-      render :edit, status: :unprocessable_entity
+def update
+  if params[:property][:images_to_delete].present?
+    params[:property][:images_to_delete].each do |image_id|
+      image = @property.images.find(image_id)
+      image.purge
     end
   end
+
+  # Append new images if any are uploaded
+  if params[:property][:images].present?
+    @property.images.attach(params[:property][:images])
+  end
+
+  if @property.update(property_params.except(:images))
+    redirect_to @property, notice: 'Property was successfully updated.'
+  else
+    render :edit, status: :unprocessable_entity
+  end
+end
+
+
+
+
 
   def destroy
     @property.destroy
     redirect_to properties_url, notice: 'Property was successfully destroyed.'
   end
+  
 
   private
 
@@ -53,10 +79,11 @@ end
   end
 
   def property_params
-    params.require(:property).permit(
-      :title, :description, :price, :bedrooms, :bathrooms, :agent_id, :property_type, :video, :label,
-      :zip_code, :country, :province_state, :neighborhood, :unit_price, :status, :size, :land_area, :year_built,
-      :rooms, :garages, amenities: [], attachments: [], images: []
-    )
-  end
+  params.require(:property).permit(
+    :title, :description, :price, :bedrooms, :bathrooms, :agent_id, :property_type, :address, :video, :label,
+    :zip_code, :country, :province_state, :neighborhood, :unit_price, :status, :size, :land_area, :year_built,
+    :latitude, :longitude, :rooms, :garages, amenities: [], attachments: [], images: []
+  )
+end
+
 end
