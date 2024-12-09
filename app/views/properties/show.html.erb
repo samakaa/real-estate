@@ -38,12 +38,16 @@
     <div class="header-property-detail">
       <div class="content-top d-flex justify-content-between align-items-center">
         <div class="box-name">
-          <a href="#" class="flag-tag primary">For Rent</a>
+          <a class="flag-tag primary"><%= @property.status %></a>
           <h4 class="title link"><%= @property.title %></h4>
         </div>
         <div class="box-price d-flex align-items-center">
           <h4><%= @property.price %> DT</h4>
+
+          <% if @property.status == "for rent" %>
           <span class="body-1 text-variant-1">/month</span>
+          <% end %>
+
         </div>
       </div>
       <div class="content-bottom">
@@ -263,27 +267,22 @@
 
         <div class="single-property-element single-property-attachments">
           <div class="h7 title fw-7">File Attachments</div>
+
           <div class="row">
+            <% @property.attachments.each_with_index do |attachment, index| %>
             <div class="col-sm-6">
-              <a href="#" target="_blank" class="attachments-item">
+              <a href="<%= rails_blob_path(attachment, disposition: "attachment") %>" target="_blank" class="attachments-item">
                 <div class="box-icon w-60">
-                  <img src="images/home/file-1.png" alt="file">
+                  <%= image_tag "home/file-#{index.even? ? '1' : '2'}.png", alt: "file" %>
                 </div>
-                <span>Villa-Document.pdf</span>
+                <span><%= attachment.filename.to_s %></span>
                 <i class="icon icon-download"></i>
               </a>
             </div>
-            <div class="col-sm-6">
-              <a href="#" target="_blank" class="attachments-item">
-                <div class="box-icon w-60">
-                  <img src="images/home/file-2.png" alt="file">
-                </div>
-                <span>Villa-Document.pdf</span>
-                <i class="icon icon-download"></i>
-              </a>
-            </div>
+            <% end %>
           </div>
         </div>
+
 
         <div class="single-property-element single-property-loan">
           <div class="h7 title fw-7">Loan Calculator</div>

@@ -5,7 +5,6 @@
 //= require_tree ./custom
 
 
-
 import "bootstrap";
 import $ from 'jquery';
 window.$ = $;
@@ -27,6 +26,7 @@ import 'aos/dist/aos.css';
 document.addEventListener("turbo:load", function () {
   AOS.init();
 });
+
 
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";

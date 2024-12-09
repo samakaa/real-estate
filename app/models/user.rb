@@ -6,5 +6,18 @@ class User < ApplicationRecord
     has_one_attached :image
 
    enum role: { regular: 'regular', agent: 'agent', admin: 'admin' }
+
+     def self.ransackable_attributes(auth_object = nil)
+    [
+      "id", "name", "email", "job", "position", "phone_number", "office_number", 
+      "office_address", "personal_address", "facebook", "twitter", "linkedin", 
+      "description", "role", "created_at", "updated_at"
+    ]
+  end
+
+  # Add searchable associations (if any, e.g., related properties)
+  def self.ransackable_associations(auth_object = nil)
+    [] # Add associations like ["properties"] if applicable
+  end
 end
 

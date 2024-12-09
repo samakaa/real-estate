@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'home/index'
  devise_for :users, controllers: { sessions: 'sessions', registrations: 'users/registrations' }
 
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
 
 resources :properties do
   member do
-    delete :delete_image_attachment
+    delete :remove_image
   end
 end
 

@@ -5,6 +5,21 @@ class Property < ApplicationRecord
 
 
   validate :acceptable_image
+
+
+   def self.ransackable_attributes(auth_object = nil)
+    [
+      "title", "description", "price", "bedrooms", "bathrooms", "agent_id", 
+      "property_type", "address", "label", "zip_code", "country", "province_state", 
+      "neighborhood", "unit_price", "status", "size", "land_area", "year_built", 
+      "latitude", "longitude", "rooms", "garages", "created_at", "updated_at"
+    ]
+  end
+
+    # Define searchable associations
+  def self.ransackable_associations(auth_object = nil)
+    ["agent"] # Replace with other associations as needed
+  end
  def geocode
     results = Geocoder.search(self.address)
     if results.present?

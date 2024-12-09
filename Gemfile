@@ -7,6 +7,7 @@ ruby "3.1.2"
 gem "rails", "~> 7.0.4"
 
 gem 'devise'
+gem 'activeadmin'
 
 gem 'image_processing', '~> 1.2'
 gem 'mini_magick'

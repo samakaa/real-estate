@@ -1,0 +1,169 @@
+@import "fonts/fonts";
+@import "fonts/font-icons";
+@import "bootstrap.min";
+@import "swiper-bundle.min";
+@import "jquery.fancybox.min";
+@import "animate";
+@import "styles";
+
+
+/* Container for all image previews */
+.images-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  /* Space between previews */
+  justify-content: center;
+  /* Center-aligns all previews */
+  padding: 20px;
+  background-color: #f9f9f9;
+  /* Light gray background */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Individual image preview container */
+.image-preview {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  /* Ensures square container */
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  /* Makes it circular */
+  overflow: hidden;
+  /* Clips content to the circle */
+  padding: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Light shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Hover effects */
+}
+
+.image-preview:hover {
+  transform: scale(1.1);
+  /* Slight zoom on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  /* Deeper shadow on hover */
+}
+
+/* The actual image inside the preview */
+.property-image {
+  width: 100%;
+  /* Fully fills the container */
+  height: 100%;
+  /* Fully fills the container */
+  object-fit: cover;
+  /* Ensures image covers the circle nicely */
+  border-radius: 50%;
+  /* Makes the image circular */
+  transition: transform 0.3s ease, border 0.3s ease;
+}
+
+.property-image:hover {
+  transform: scale(1.1);
+  /* Zoom effect on hover */
+  border: 3px solid #ddd;
+  /* Optional border effect on hover */
+}
+
+/* Delete button styles */
+.delete-checkbox {
+  position: absolute;
+  top: 50%;
+  /* Center vertically */
+  left: 50%;
+  /* Center horizontally */
+  transform: translate(-50%, -50%);
+  /* Adjust to true center */
+  background-color: rgba(255, 0, 0, 0.8);
+  /* Red background for visibility */
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+  /* Circular button */
+  cursor: pointer;
+  z-index: 2;
+  /* Ensures it appears above the image */
+  font-size: 12px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  /* Hidden by default */
+  transition: opacity 0.3s ease;
+  /* Smooth fade-in/out effect */
+}
+
+.image-preview:hover .delete-checkbox {
+  opacity: 1;
+  /* Show delete button on hover */
+}
+
+/* Label for delete checkbox (optional if using a custom button) */
+label[for^="property_images_to_delete_"] {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+label[for^="property_images_to_delete_"]:hover {
+  color: #d9534f;
+}
+
+/* Adjustments for responsiveness */
+@media screen and (max-width: 768px) {
+  .image-preview {
+    width: 120px;
+    height: 120px;
+  }
+
+  .delete-checkbox {
+    font-size: 10px;
+    padding: 6px;
+  }
+}
+
+.footer-logo {
+  background-image: image-url('slider/slider-1.png');
+  width: 174px;
+  height: 44px;
+}
+
+.flat-slider.home-1 {
+  background-image: image-url('slider/slider-1.png');
+  background-attachment: fixed;
+}
+
+.img-video {
+  position: relative;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.btn-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-video:hover {
+  background-color: rgba(255, 0, 0, 0.7);
+  /* Change color on hover */
+  transform: translate(-50%, -50%) scale(1.1);
+  /* Scale up on hover */
+}

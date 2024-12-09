@@ -3,16 +3,8 @@
   <div class="button-show-hide show-mb">
     <span class="body-1">Show Dashboard</span>
   </div>
-  <div class="images-section">
-    <% @property.images.each do |image| %>
-    <div class="image-preview">
-      <%= image_tag(url_for(image), alt: "Property Image", class: "property-image") %>
-      <%= check_box_tag "property[images_to_delete][]", image.id, false %>
-      <!-- Pass image ID -->
-      <%= label_tag "property_images_to_delete_#{image.id}", "Delete" %>
-    </div>
-    <% end %>
-  </div>
+
+
 
   <!-- Upload Media Section -->
   <div class="widget-box-2">
@@ -26,6 +18,16 @@
         </div>
         <p class="file-name fw-5">Or drop image here to upload</p>
       </label>
+    </div>
+    <div class="images-section">
+      <% @property.images.each do |image| %>
+      <div class="image-preview" id="image-preview-<%= image.id %>">
+        <%= image_tag(url_for(image), alt: "Property Image", class: "property-image") %>
+        <%= check_box_tag "property[images_to_delete][]", image.id, false, class: "delete-checkbox", data: { preview_id: "image-preview-#{image.id}" } %>
+
+        <%= label_tag "property_images_to_delete_#{image.id}", "Delete" %>
+      </div>
+      <% end %>
     </div>
   </div>
 
@@ -240,5 +242,26 @@
         document.getElementById("longitude-field").value = lng;
       });
     }
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find all checkboxes with the "delete-checkbox" class
+    const deleteCheckboxes = document.querySelectorAll(".delete-checkbox");
+
+    deleteCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", function() {
+        const previewId = this.dataset.previewId; // Get the preview ID from the data attribute
+        const previewElement = document.getElementById(previewId);
+
+        if (this.checked) {
+          previewElement.style.display = "none"; // Hide the preview element
+        } else {
+          previewElement.style.display = "block"; // Show it again if unchecked
+        }
+      });
+    });
   });
 </script>
