@@ -8,6 +8,7 @@ gem "rails", "~> 7.0.4"
 
 gem 'devise'
 gem 'activeadmin'
+gem 'haversine'
 
 gem 'image_processing', '~> 1.2'
 gem 'mini_magick'

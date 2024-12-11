@@ -44,7 +44,7 @@
         <div class="box-price d-flex align-items-center">
           <h4><%= @property.price %> DT</h4>
 
-          <% if @property.status == "for rent" %>
+          <% if @property.status == "For Rent" %>
           <span class="body-1 text-variant-1">/month</span>
           <% end %>
 
@@ -316,48 +316,27 @@
         </div>
         <div class="single-property-element single-property-nearby">
           <div class="h7 title fw-7">What’s nearby?</div>
-          <p class="body-2">Explore nearby amenities to precisely locate your property and identify surrounding
-            conveniences, providing a comprehensive overview of the living environment and the property's
-            convenience.</p>
+          <p class="body-2">
+            Explore nearby amenities to precisely locate your property and identify surrounding conveniences, providing a comprehensive overview of the living environment and the property's convenience.
+          </p>
           <div class="grid-2 box-nearby">
             <ul class="box-left">
+              <% @nearby_locations.first(4).each do |location| %>
               <li class="item-nearby">
-                <span class="label">School:</span>
-                <span class="fw-7">0.7 km</span>
+                <span class="label"><%= location[:name] %>:</span>
+                <span class="fw-7"><%= location[:distance] %> km</span>
               </li>
-              <li class="item-nearby">
-                <span class="label">University:</span>
-                <span class="fw-7">1.3 km</span>
-              </li>
-              <li class="item-nearby">
-                <span class="label">Grocery center:</span>
-                <span class="fw-7">0.6 km</span>
-              </li>
-              <li class="item-nearby">
-                <span class="label">Market:</span>
-                <span class="fw-7">1.1 km</span>
-              </li>
+              <% end %>
             </ul>
             <ul class="box-right">
+              <% @nearby_locations.last(4).each do |location| %>
               <li class="item-nearby">
-                <span class="label">Hospital:</span>
-                <span class="fw-7">0.4 km</span>
+                <span class="label"><%= location[:name] %>:</span>
+                <span class="fw-7"><%= location[:distance] %> km</span>
               </li>
-              <li class="item-nearby">
-                <span class="label">Metro station:</span>
-                <span class="fw-7">1.8 km</span>
-              </li>
-              <li class="item-nearby">
-                <span class="label">Gym, wellness:</span>
-                <span class="fw-7">1.3 km</span>
-              </li>
-              <li class="item-nearby">
-                <span class="label">River:</span>
-                <span class="fw-7">2.1 km</span>
-              </li>
+              <% end %>
             </ul>
           </div>
-
         </div>
 
       </div>
@@ -682,17 +661,20 @@
     </div>
     <div class="swiper tf-latest-property" data-preview-lg="3" data-preview-md="2" data-preview-sm="2" data-space="30" data-loop="true">
       <div class="swiper-wrapper">
+        <% @properties.each do |property| %>
         <div class="swiper-slide">
           <div class="homeya-box style-2">
             <div class="archive-top">
-              <a href="#" class="images-group">
+              <a href="<%= property_path(property) %>" class="images-group">
                 <div class="images-style">
-                  <img src="images/home/house-4.jpg" alt="img">
+                  <%= image_tag(property.images.first, alt: property.title, class: "img-fluid") if property.images.any? %>
                 </div>
                 <div class="top">
                   <ul class="d-flex gap-8">
+                    <% if property.featured %>
                     <li class="flag-tag success">Featured</li>
-                    <li class="flag-tag style-1">For Sale</li>
+                    <% end %>
+                    <li class="flag-tag style-1"><%= property.status.capitalize %></li>
                   </ul>
                   <ul class="d-flex gap-4">
                     <li class="box-icon w-32">
@@ -707,27 +689,26 @@
                   </ul>
                 </div>
                 <div class="bottom">
-                  <span class="flag-tag style-2">House</span>
+                  <span class="flag-tag style-2"><%= property.type %></span>
                 </div>
               </a>
               <div class="content">
-                <div class="h7 text-capitalize fw-7"><a href="#" class="link"> Sunset Heights Estate, Beverly
-                    Hills</a></div>
+                <div class="h7 text-capitalize fw-7"><a href="<%= property_path(property) %>" class="link"><%= property.title %></a></div>
                 <div class="desc"><i class="fs-16 icon icon-mapPin"></i>
-                  <p>1040 Ocean, Santa Monica, California</p>
+                  <p><%= property.address %></p>
                 </div>
                 <ul class="meta-list">
                   <li class="item">
                     <i class="icon icon-bed"></i>
-                    <span>3</span>
+                    <span><%= property.bedrooms %></span>
                   </li>
                   <li class="item">
                     <i class="icon icon-bathtub"></i>
-                    <span>2</span>
+                    <span><%= property.bathrooms %></span>
                   </li>
                   <li class="item">
                     <i class="icon icon-ruler"></i>
-                    <span>600 SqFT</span>
+                    <span><%= property.size %> M²</span>
                   </li>
                 </ul>
               </div>
@@ -735,211 +716,26 @@
             <div class="archive-bottom d-flex justify-content-between align-items-center">
               <div class="d-flex gap-8 align-items-center">
                 <div class="avatar avt-40 round">
-                  <img src="images/avatar/avt-8.jpg" alt="avt">
+                  <%= image_tag(property.agent.image, alt: property.agent.name, class: "rounded-circle") if property.agent.image.attached? %>
+
                 </div>
-                <span>Jacob Jones</span>
+                <span><%= property.agent.name %></span>
               </div>
               <div class="d-flex align-items-center">
-                <h6>$250,00</h6>
+                <h6><%= number_with_delimiter(property.price, delimiter: ",") %> TND</h6>
+                <% if property.status== "For Rent" %>
                 <span class="text-variant-1">/month</span>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
-        <div class="swiper-slide">
-          <div class="homeya-box style-2">
-            <div class="archive-top">
-              <a href="#" class="images-group">
-                <div class="images-style">
-                  <img src="images/home/house-5.jpg" alt="img">
-                </div>
-                <div class="top">
-                  <ul class="d-flex gap-8">
-                    <li class="flag-tag success">Featured</li>
-                    <li class="flag-tag style-1">For Sale</li>
-                  </ul>
-                  <ul class="d-flex gap-4">
-                    <li class="box-icon w-32">
-                      <span class="icon icon-arrLeftRight"></span>
-                    </li>
-                    <li class="box-icon w-32">
-                      <span class="icon icon-heart"></span>
-                    </li>
-                    <li class="box-icon w-32">
-                      <span class="icon icon-eye"></span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="bottom">
-                  <span class="flag-tag style-2">Office</span>
-                </div>
-              </a>
-              <div class="content">
-                <div class="h7 text-capitalize fw-7"><a href="#" class="link">Coastal Serenity Cottage</a></div>
-                <div class="desc"><i class="fs-16 icon icon-mapPin"></i>
-                  <p>21 Hillside Drive, Beverly Hills, California</p>
-                </div>
-                <ul class="meta-list">
-                  <li class="item">
-                    <i class="icon icon-bed"></i>
-                    <span>4</span>
-                  </li>
-                  <li class="item">
-                    <i class="icon icon-bathtub"></i>
-                    <span>2</span>
-                  </li>
-                  <li class="item">
-                    <i class="icon icon-ruler"></i>
-                    <span>600 SqFT</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="archive-bottom d-flex justify-content-between align-items-center">
-              <div class="d-flex gap-8 align-items-center">
-                <div class="avatar avt-40 round">
-                  <img src="images/avatar/avt-6.jpg" alt="avt">
-                </div>
-                <span>Kathryn Murphy</span>
-              </div>
-              <div class="d-flex align-items-center">
-                <h6>$2050,00</h6>
-                <span class="text-variant-1">/SqFT</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="homeya-box style-2">
-            <div class="archive-top">
-              <a href="#" class="images-group">
-                <div class="images-style">
-                  <img src="images/home/house-6.jpg" alt="img">
-                </div>
-                <div class="top">
-                  <ul class="d-flex gap-8">
-                    <li class="flag-tag success">Featured</li>
-                    <li class="flag-tag style-1">For Sale</li>
-                  </ul>
-                  <ul class="d-flex gap-4">
-                    <li class="box-icon w-32">
-                      <span class="icon icon-arrLeftRight"></span>
-                    </li>
-                    <li class="box-icon w-32">
-                      <span class="icon icon-heart"></span>
-                    </li>
-                    <li class="box-icon w-32">
-                      <span class="icon icon-eye"></span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="bottom">
-                  <span class="flag-tag style-2">Studio</span>
-                </div>
-              </a>
-              <div class="content">
-                <div class="h7 text-capitalize fw-7"><a href="#" class="link">Lakeview Haven, Lake Tahoe</a></div>
-                <div class="desc"><i class="fs-16 icon icon-mapPin"></i>
-                  <p>8 Broadway, Brooklyn, New York</p>
-                </div>
-                <ul class="meta-list">
-                  <li class="item">
-                    <i class="icon icon-bed"></i>
-                    <span>2</span>
-                  </li>
-                  <li class="item">
-                    <i class="icon icon-bathtub"></i>
-                    <span>2</span>
-                  </li>
-                  <li class="item">
-                    <i class="icon icon-ruler"></i>
-                    <span>600 SqFT</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="archive-bottom d-flex justify-content-between align-items-center">
-              <div class="d-flex gap-8 align-items-center">
-                <div class="avatar avt-40 round">
-                  <img src="images/avatar/avt-10.jpg" alt="avt">
-                </div>
-                <span>Floyd Miles</span>
-              </div>
-              <div class="d-flex align-items-center">
-                <h6>$250,00</h6>
-                <span class="text-variant-1">/month</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="homeya-box style-2">
-            <div class="archive-top">
-              <a href="#" class="images-group">
-                <div class="images-style">
-                  <img src="images/home/house-1.jpg" alt="img">
-                </div>
-                <div class="top">
-                  <ul class="d-flex gap-8">
-                    <li class="flag-tag success">Featured</li>
-                    <li class="flag-tag style-1">For Sale</li>
-                  </ul>
-                  <ul class="d-flex gap-4">
-                    <li class="box-icon w-32">
-                      <span class="icon icon-arrLeftRight"></span>
-                    </li>
-                    <li class="box-icon w-32">
-                      <span class="icon icon-heart"></span>
-                    </li>
-                    <li class="box-icon w-32">
-                      <span class="icon icon-eye"></span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="bottom">
-                  <span class="flag-tag style-2">Studio</span>
-                </div>
-              </a>
-              <div class="content">
-                <div class="h7 text-capitalize fw-7"><a href="#" class="link"> Casa Lomas de Machalí Machas</a>
-                </div>
-                <div class="desc"><i class="fs-16 icon icon-mapPin"></i>
-                  <p>33 Maple Street, San Francisco, California</p>
-                </div>
-                <ul class="meta-list">
-                  <li class="item">
-                    <i class="icon icon-bed"></i>
-                    <span>3</span>
-                  </li>
-                  <li class="item">
-                    <i class="icon icon-bathtub"></i>
-                    <span>2</span>
-                  </li>
-                  <li class="item">
-                    <i class="icon icon-ruler"></i>
-                    <span>600 SqFT</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="archive-bottom d-flex justify-content-between align-items-center">
-              <div class="d-flex gap-8 align-items-center">
-                <div class="avatar avt-40 round">
-                  <img src="images/avatar/avt-6.jpg" alt="avt">
-                </div>
-                <span>Arlene McCoy</span>
-              </div>
-              <div class="d-flex align-items-center">
-                <h6>$7250,00</h6>
-                <span class="text-variant-1">/SqFT</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
 </section>
+
 
 <%= javascript_include_tag "custom/carousel" %>
 <%= javascript_include_tag "custom/swiper-bundle.min" %>

@@ -5,8 +5,10 @@ class Property < ApplicationRecord
 
 
   validate :acceptable_image
+  TYPES = ['Apartment', 'Villa', 'Studio', 'House', 'Office'].freeze
 
-
+  scope :featured, -> { where(featured: true) }
+  scope :recent, -> { order(created_at: :desc) }
    def self.ransackable_attributes(auth_object = nil)
     [
       "title", "description", "price", "bedrooms", "bathrooms", "agent_id", 
@@ -39,4 +41,5 @@ class Property < ApplicationRecord
       end
     end
   end
+  
 end

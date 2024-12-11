@@ -1,7 +1,10 @@
 class PropertiesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user! , only: %i[ edit update destroy]
   before_action :ensure_agent_user, only: [:new, :create]
   before_action :set_property, only: %i[show edit update destroy]
+  require 'net/http'
+  require 'json'
+  require 'haversine'
 
   def new
     @property = Property.new
@@ -23,7 +26,9 @@ class PropertiesController < ApplicationController
   end
 
  def show
+   @properties = Property.featured.recent.limit(10) # Adjust scope as needed
   @property = Property.find(params[:id])
+  
     @locations = [
       {
         title: @property.title,
@@ -32,6 +37,41 @@ class PropertiesController < ApplicationController
         address: @property.address
       }
     ]
+     @location = [
+    { name: 'Patsry Sfar', latitude: 35.509896628753374, longitude: 11.051859751676746 },
+    { name: 'University', latitude: 35.52258770822307, longitude: 11.03038695099358 },
+    { name: 'Dar Shat', latitude: 35.52751358395876, longitude: 11.037824782331114 },
+    { name: 'Carrefour Market', latitude: 35.50703238075593, longitude: 11.052217653667519 },
+    { name: 'Hospital', latitude: 35.510703409354676, longitude: 11.032397645726537 },
+    { name: 'Central Metro station', latitude: 35.50076115195508, longitude: 11.064438140721364 },
+    { name: 'Clinic Exellence', latitude: 35.4995412153538, longitude: 11.05860916252987 },
+    { name: 'Night pharmacy Zone', latitude: 35.526120227787615, longitude: 11.032771503442492 }, 
+  ]
+
+  # Calculate distances using Haversine formula
+  @nearby_locations = @location.map do |location|
+    distance = Haversine.distance(
+      @property.latitude, @property.longitude,
+      location[:latitude], location[:longitude]
+    ).to_km
+    location.merge(distance: distance.round(1)) # Add distance in km
+  end
+ #   api_key = "valid api"
+ # radius = 2000 # Search radius in meters
+
+  # Base URL for Google Places API
+ # url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{@property.latitude},##{@property.longitude}&radius=#{radius}&key=#{api_key}")
+
+ # response = Net::HTTP.get(url)
+ # places = JSON.parse(response)["results"]
+
+ # @nearby_locations = places.map do |place|
+  #  {
+  #    name: place["name"],
+ #     type: place["types"].first.capitalize,
+ #     distance: "Within #{radius / 1000} km"
+ #   }
+#  end
 end
 
   def edit
