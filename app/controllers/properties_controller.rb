@@ -1,7 +1,8 @@
 class PropertiesController < ApplicationController
-  before_action :authenticate_user! , only: %i[ edit update destroy]
+  before_action :authenticate_user! , only: %i[ edit update destroy index]
   before_action :ensure_agent_user, only: [:new, :create]
   before_action :set_property, only: %i[show edit update destroy]
+  before_action :require_same_user, only: [:edit, :update]
   require 'net/http'
   require 'json'
   require 'haversine'
@@ -22,7 +23,9 @@ class PropertiesController < ApplicationController
   end
 
   def index
-    @properties = Property.all
+    
+    @properties = Property.where(agent_id: current_user.id)
+    
   end
 
  def show
@@ -102,14 +105,26 @@ end
 
 
 
-  def destroy
-    @property.destroy
-    redirect_to properties_url, notice: 'Property was successfully destroyed.'
+def destroy
+  @property = current_user.properties.find(params[:id])
+  @property.destroy
+  respond_to do |format|
+    format.html { redirect_to properties_path, notice: "Property successfully deleted." }
+    format.turbo_stream # For Turbo dynamic updates
   end
-  
+end
 
   private
+     def require_same_user
 
+          if current_user.id != @property.agent_id
+
+               flash[:danger] = "Vous n'avez pas le droit de modifier cette page"
+
+               redirect_to root_path
+
+          end
+        end
   def set_property
     @property = Property.find(params[:id])
   end

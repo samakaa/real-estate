@@ -7,6 +7,17 @@
 @import "styles";
 
 
+.box-image-detail img {
+  width: 700px;
+  /* Makes the image fill the container horizontally */
+  height: 500px;
+  /* Adjusts the height to fill the container */
+  object-fit: cover;
+  /* Ensures the image maintains its aspect ratio and covers the container */
+  transition: transform 0.3s ease, filter 0.3s ease;
+  /* Adds smooth transitions */
+}
+
 /* Container for all image previews */
 .images-section {
   display: flex;
@@ -122,6 +133,11 @@ label[for^="property_images_to_delete_"]:hover {
   .image-preview {
     width: 120px;
     height: 120px;
+  }
+
+  .box-image-detail {
+    width: 550px;
+    height: 500px;
   }
 
   .delete-checkbox {

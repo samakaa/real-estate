@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
     has_one_attached :image
-   has_many :properties, dependent: :destroy
+   has_many :properties,:foreign_key => 'agent_id', dependent: :destroy
    enum role: { regular: 'regular', agent: 'agent', admin: 'admin' }
 
      def self.ransackable_attributes(auth_object = nil)

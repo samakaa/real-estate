@@ -1,6 +1,6 @@
 class Property < ApplicationRecord
   belongs_to :agent, class_name: 'User'
-  has_many_attached :images
+  has_many_attached :images , dependent: :destroy
   has_many_attached :attachments
 
 

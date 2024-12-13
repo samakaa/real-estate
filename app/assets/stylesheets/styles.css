@@ -9841,6 +9841,7 @@ label {
 }
 
 .layout-wrap .main-content {
+    background-color: #f7f7f7;
     padding-left: 280px;
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;

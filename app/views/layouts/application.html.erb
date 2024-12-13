@@ -259,20 +259,18 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      console.log("Flash message script running"); <
-      %
-      if flash[: notice] % >
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("Flash message script running");
+      <% if flash[:notice] %>
         console.log("Notice flash:", "<%= j flash[:notice] %>");
-      toastr.success("<%= j flash[:notice] %>"); <
-      %
-      elsif flash[: alert] % >
+        toastr.success("<%= j flash[:notice] %>");
+      <% elsif flash[:alert] %>
         console.log("Alert flash:", "<%= j flash[:alert] %>");
-      toastr.error("<%= j flash[:alert] %>"); <
-      %
-      end % >
+        toastr.error("<%= j flash[:alert] %>");
+      <% end %>
     });
   </script>
+
   <!-- In the <head> section for AOS CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css">
 
