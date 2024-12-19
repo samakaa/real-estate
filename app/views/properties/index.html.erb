@@ -1,3 +1,6 @@
+ <div class="wrap-right">
+   <div id="map" class="top-map" data-map-zoom="16" data-map-scroll="true"></div>
+ </div>
  <div class="main-content">
    <div class="main-content-inner">
      <div class="button-show-hide show-mb">
@@ -17,20 +20,8 @@
                </tr>
              </thead>
              <tbody>
-               <% @properties.each do |property| %>
-               <%= form_with url: property_path(property), method: :delete, local: true do |form| %>
-               <%= form.submit "Delete", class: "item", data: { confirm: "Are you sure?" } %>
-               <% end %>
 
-               <%= link_to property_path(property), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" do %>
-               <i class="icon icon-trash"></i>Delete
-               <% end %>
-               <a data-turbo-method="delete" data-turbo-confirm="Are you sure?" href="/properties/36" class="btn btn-danger">
-                 <i class="icon icon-trash"></i>Delete
-               </a>
-               <%= link_to property_path(property), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" do %>
-               <i class="icon icon-trash"></i>Delete
-               <% end %>
+               <% @properties.each do |property| %>
 
 
                <tr class="file-delete">
@@ -62,11 +53,25 @@
                    <ul class="list-action">
                      <li><a href="<%= edit_property_path(property) %>" class="item"><i class="icon icon-edit"></i>Edit</a></li>
                      <li><a class="item"><i class="icon icon-sold"></i>Sold</a></li>
+                     <ul>
+                       <li id="property-item-<%= property.id %>">
+                         <!-- Property details -->
+                         <%= form_with model: property, 
+                url: property_path(property), 
+                method: :delete, 
+                remote: true, 
+                html: { id: "delete-form-#{property.id}" }, 
+                class: 'inline-form', 
+                data: { confirm: 'Are you sure?' } do %>
+                         <button type="submit" class="btn btn-danger">
+                           <i class="icon icon-trash"></i> Delete
+                         </button>
+                         <% end %>
+                       </li>
 
-                     <li> <%= link_to property_path(property), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: ' item' do %>
-                       <i class="icon icon-trash"></i>Delete
-                       <% end %>
-                     <li>
+                     </ul>
+
+
                    </ul>
                  </td>
                </tr>
@@ -78,12 +83,10 @@
            </table>
          </div>
 
-         <ul class="wd-navigation">
-           <li><a href="#" class="nav-item active">1</a></li>
-           <li><a href="#" class="nav-item">2</a></li>
-           <li><a href="#" class="nav-item">3</a></li>
-           <li><a href="#" class="nav-item"><i class="icon icon-arr-r"></i></a></li>
-         </ul>
+
+
+         <%= paginate @properties %>
+
        </div>
      </div>
    </div>
@@ -94,3 +97,6 @@
 
  <div class="overlay-dashboard"></div>
  </div>
+ <%= javascript_include_tag 'custom/marker', 'data-turbolinks-track': 'reload' %>
+ <%= javascript_include_tag 'custom/map', 'data-turbolinks-track': 'reload' %>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBWzH7VJTGL_5cQgGVBi7wqDc-BhQRLeY"></script>

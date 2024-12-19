@@ -1,0 +1,15 @@
+<%= paginator.render do %>
+<ul class="wd-navigation">
+
+  <li> <%= prev_page_tag unless current_page.first? %></li>
+  <%# Page Numbers %>
+  <% paginator.each_page do |page_proxy| %>
+  <li class="nav-item <%= 'active' if page_proxy.current? %>">
+    <%= link_to page_proxy, url_for(page: page_proxy), class: "page-link" %>
+  </li>
+  <% end %>
+
+  <%# Next Page Link %>
+  <%= next_page_tag unless current_page.last? %>
+</ul>
+<% end %>

@@ -5,27 +5,16 @@
 //= require_tree ./custom
 
 
-import "bootstrap";
-import $ from 'jquery';
-window.$ = $;
-window.jQuery = $;
-import Rails from "@rails/ujs";
-import "@hotwired/turbo-rails";
-Rails.start();
 
 
-import "@hotwired/turbo-rails";
 import "controllers";
 import "custom";
 import "@fortawesome/fontawesome-free/css/all";
 import "custom/main";
 import 'bootstrap';  // Assuming Bootstrap is already included
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
-document.addEventListener("turbo:load", function () {
-  AOS.init();
-});
+import Rails from "@rails/ujs";
+Rails.start();
 
 
 import toastr from "toastr";

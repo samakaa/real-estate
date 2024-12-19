@@ -22,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hotwired/turbo": "^8.0.12",
     "@rails/webpacker": "5.4.4",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.3",
@@ -29,6 +30,7 @@
     "dropzone": "^6.0.0-beta.2",
     "jquery": "^3.7.1",
     "popper.js": "^1.16.1",
+    "rails-ujs": "^5.2.8-1",
     "swiper": "^11.1.14",
     "toastr": "^2.1.4",
     "webpack": "4.46.0",

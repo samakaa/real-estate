@@ -24,7 +24,8 @@ class PropertiesController < ApplicationController
 
   def index
     
-    @properties = Property.where(agent_id: current_user.id)
+@properties = Property.where(agent_id: current_user.id).page(params[:page]).per(6)
+
     
   end
 
@@ -106,13 +107,20 @@ end
 
 
 def destroy
-  @property = current_user.properties.find(params[:id])
-  @property.destroy
-  respond_to do |format|
-    format.html { redirect_to properties_path, notice: "Property successfully deleted." }
-    format.turbo_stream # For Turbo dynamic updates
+  @property = Property.find(params[:id])
+  if @property.destroy
+    respond_to do |format|
+      format.html { redirect_to properties_path, notice: 'Property deleted successfully.' }
+      format.js   # This will render `destroy.js.erb`
+    end
+  else
+    respond_to do |format|
+      format.html { redirect_to properties_path, alert: 'Failed to delete the property.' }
+      format.js { render js: "alert('Failed to delete the property.');" }
+    end
   end
 end
+
 
   private
      def require_same_user

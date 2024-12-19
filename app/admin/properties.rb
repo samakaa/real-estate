@@ -81,11 +81,11 @@ ActiveAdmin.register Property do
       f.input :price
       f.input :bedrooms
       f.input :bathrooms
-      f.input :agent_id, as: :select, collection: Agent.all.map { |a| [a.name, a.id] } # Assuming Agent is a model
+      f.input :agent_id, as: :select, collection: User.all.map { |a| [a.name, a.id] } # Assuming Agent is a model
       f.input :property_type, as: :select, collection: ["House", "Apartment", "Condo"] # Example options
       f.input :address
       f.input :zip_code
-      f.input :country
+      f.input :country, as: :string, input_html: { class: 'country-select' }
       f.input :province_state
       f.input :neighborhood
       f.input :unit_price

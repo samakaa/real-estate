@@ -10022,14 +10022,6 @@ label {
     margin-bottom: 8px;
 }
 
-.layout-wrap .wrap-table .list-action .item {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    font-size: 14px;
-    line-height: 24px;
-    font-weight: 500;
-}
 
 .layout-wrap .wrap-table .list-action .item .icon {
     font-size: 20px;

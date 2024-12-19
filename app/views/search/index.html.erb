@@ -1,0 +1,34 @@
+<h1>Search Results</h1>
+
+<% if @properties.any? %>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Location</th>
+      <th>Price</th>
+      <th>Rooms</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @properties.each do |property| %>
+    <tr>
+      <td><%= property.title %></td> <!-- Replace `title` with your column name -->
+      <td><%= property.property_type %></td>
+      <td><%= property.location %></td>
+      <td><%= number_to_currency(property.price, unit: "$") %></td>
+      <td><%= property.rooms %></td>
+      <td>
+        <%= link_to "View", property_path(property), class: "btn btn-sm btn-info" %>
+        <%= link_to "Edit", edit_property_path(property), class: "btn btn-sm btn-warning" %>
+        <%= link_to "Delete", property_path(property), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>No properties found matching your search criteria.</p>
+<% end %>

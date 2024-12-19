@@ -9,6 +9,8 @@
 
   <!-- Add this in the <head> section -->
   <!-- Include jQuery before Toastr -->
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <%= javascript_include_tag 'custom/jquery.min', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'custom/jquery.nice-select.min', 'data-turbolinks-track': 'reload' %>
@@ -49,7 +51,7 @@
   <%= javascript_include_tag 'custom/jquery.nice-select.min', 'data-turbolinks-track': 'reload' %>
 
 
-  <%= javascript_importmap_tags %>
+
 
 
 
@@ -57,6 +59,9 @@
   <%= javascript_include_tag 'custom/main', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "styles", media: "all", "data-turbolinks-track": "reload" %>
+  <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
+
+  <%= javascript_importmap_tags %>
 
   <style>
     .image-preview {
@@ -108,6 +113,7 @@
 
 
           <%= yield %>
+
           <%= render "shared/footer" %>
         </main>
       </div>
@@ -259,15 +265,18 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      console.log("Flash message script running");
-      <% if flash[:notice] %>
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log("Flash message script running"); <
+      %
+      if flash[: notice] % >
         console.log("Notice flash:", "<%= j flash[:notice] %>");
-        toastr.success("<%= j flash[:notice] %>");
-      <% elsif flash[:alert] %>
+      toastr.success("<%= j flash[:notice] %>"); <
+      %
+      elsif flash[: alert] % >
         console.log("Alert flash:", "<%= j flash[:alert] %>");
-        toastr.error("<%= j flash[:alert] %>");
-      <% end %>
+      toastr.error("<%= j flash[:alert] %>"); <
+      %
+      end % >
     });
   </script>
 

@@ -6,6 +6,10 @@ class Property < ApplicationRecord
 
   validate :acceptable_image
   TYPES = ['Apartment', 'Villa', 'Studio', 'House', 'Office'].freeze
+  scope :by_keyword, ->(keyword) { where("title ILIKE ? OR description ILIKE ?", "%#{keyword}%", "%#{keyword}%") }
+  scope :by_location, ->(address) { where("location ILIKE ?", "%#{address}%") }
+  scope :by_type, ->(property_type) { where(property_type: property_type) if property_type != "All" }
+  scope :by_price_range, ->(min_price, max_price) { where(price: min_price..max_price) }
 
   scope :featured, -> { where(featured: true) }
   scope :recent, -> { order(created_at: :desc) }

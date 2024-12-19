@@ -12,6 +12,7 @@ resources :properties do
   end
 end
 
+get 'search', to: 'search#index', as: 'search'
 
 
    direct :rails_blob do |blob|
